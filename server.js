@@ -6,8 +6,14 @@ var server = app.listen(port,function(){
 });
 
 app.get('/', function (req, res) {
-  console.log('PORT is:' + process.env.PORT)
-  console.error("Something wrong");
-  console.log("Something normal");
-  res.send('Hello world 3 using Node ' + process.version);
+  var hostname = req.headers.host.split(":")[0];
+
+  if(hostname == "admin.domain.com")
+    res.send("this is admin response!");
+  else {
+    console.log('PORT is:' + process.env.PORT)
+    console.error("Something wrong");
+    console.log("Something normal");
+    res.send('Hello world 3 using Node ' + process.version);
+  }
 });
