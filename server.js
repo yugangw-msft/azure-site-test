@@ -8,12 +8,12 @@ var server = app.listen(port,function(){
 app.get('/', function (req, res) {
   var hostname = req.headers.host.split(":")[0];
 
-  if(hostname == "admin.domain.com")
+  if(hostname.startsWith("admin."))
     res.send("this is admin response!");
   else {
     console.log('PORT is:' + process.env.PORT)
     console.error("Something wrong");
     console.log("Something normal");
-    res.send('Hello world 3 using Node ' + process.version);
+    res.send('Hello world 4 using Node ' + process.version);
   }
 });
