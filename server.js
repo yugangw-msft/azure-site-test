@@ -14,14 +14,14 @@ app.get('/', function (req, res) {
     res.send('MSI is not configured!');
     return;
   }
-  var tokenUri = msiEndpoint + '/resource=https://management.azure.com/&api-version=2017-09-01';
+  var tokenUri = msiEndpoint + '?resource=https://management.azure.com/&api-version=2017-09-01';
   var options = {
     url: tokenUri,
     headers: {
       Secret: msiSecret
     }
   };
-  request(tokenUri, function (error, response, body) {
+  request(options, function (error, response, body) {
     if (error) {
       res.send('MSI token request failed: ' + error);
       return;
