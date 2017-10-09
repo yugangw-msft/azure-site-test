@@ -1,3 +1,4 @@
+var util = require('util');
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 3000;
@@ -14,7 +15,8 @@ app.get('/', function (req, res) {
     res.send('MSI is not configured!');
     return;
   }
-  var tokenUri = msiEndpoint + '?resource=https://management.azure.com/&api-version=2017-09-01';
+  var resource = 'https://management.azure.com/'; // can be any Azure resources, like key-vault
+  var tokenUri = util.format('%s?resource=%s&api-version=2017-09-01', msiEndpoint, resource);
   var options = {
     url: tokenUri,
     headers: {
@@ -22,10 +24,11 @@ app.get('/', function (req, res) {
     }
   };
   request(options, function (error, response, body) {
-    if (error) {
-      res.send('MSI token request failed: ' + error);
+    if (error || response.statusCode != 200) {
+      res.send(util.format('MSI token request failed. Error: %s, Response: %s', error, response));
       return;
     }
-    res.send('Token:' + JSON.stringify(response));
+    res.send('Token:' + JSON.parse(body).access_token);
+    //use this token to initialize an Azure SDK client and do something....
   });
 });
