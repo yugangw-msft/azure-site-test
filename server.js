@@ -12,10 +12,10 @@ var server = app.listen(port, function () {
 var config = {
      userName: process.env.MY_DB_USER, //update me
      password: process.env.MY_DB_PASSWORD, // update me
-     server: 'yugangwsqlserver.database.windows.net', // update me
+     server: process.env.MY_DB_SERVER, // update me 'yugangwsqlserver.database.windows.net'
      options:
         {
-          database: 'yugangwsqldb2', //update me
+          database: process.env.MY_DB, //update me 'yugangwsqldb2'
           encrypt: true
         }
    };
