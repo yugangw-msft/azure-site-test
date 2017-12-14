@@ -11,9 +11,8 @@ app.get('/', function (req, res) {
   if(hostname.startsWith("admin."))
     res.send("this is admin response!");
   else {
-    console.log('PORT is:' + process.env.PORT)
     console.error("Something wrong");
     console.log("Something normal");
-    res.send('Hello world 4 using Node ' + process.version);
+    res.send('APPSETTING_WEBSITE_SITE_NAME is:' + process.env.APPSETTING_WEBSITE_SITE_NAME);
   }
 });
