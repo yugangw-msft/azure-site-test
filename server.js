@@ -17,7 +17,7 @@ app.get('/', function (req, res) {
   else {
     console.log("Something normal");
   }
-  var echo = req.query.echo;
+  var echo = req.query.echo || "null";
   res.status(status);
   res.send(echo + " at " + (new Date().toLocaleString()));
 });
